@@ -1,0 +1,64 @@
+<body>
+
+<h2>Move the waves to the correct position</h2>
+
+<div id="chart">
+  <img src="https://github.com/ElliottWaveAcademy/elliott-dragdrop10/blob/main/%C3%9Cberschrift%20hinzuf%C3%BCgen%20-%202025-12-31T141101.045.png?raw=true" alt="Elliott Wave Chart">
+
+  <!-- Drop-Zonen -->
+  
+  
+  <div class="dropzone" style="top: 140px; left: 310px; border: 2px solid green;">(3)</div>
+  <div class="dropzone" style="top: 280px; left: 355px; border: 2px solid green;">(4)</div>
+  <div class="dropzone" style="top: 60px; left: 420px; border: 2px solid green;">(5)</div>
+  <div class="dropzone" style="top: 230px; left: 485px; border: 2px solid green;">(a)</div>
+  <div class="dropzone" style="top: 105px; left: 525px; border: 2px solid green;">(b)</div>
+  <div class="dropzone" style="top: 280px; left: 590px; border: 2px solid green;">(c)</div>
+
+  <!-- Labels 1-5 -->
+  
+  
+  <div class="label" style="top:90px; left:10px;" draggable="true">(3)</div>
+  <div class="label" style="top:130px; left:10px;" draggable="true">(4)</div>
+  <div class="label" style="top:170px; left:10px;" draggable="true">(5)</div>
+
+  <!-- Labels a-c -->
+  <div class="label" style="top:210px; left:10px;" draggable="true">(a)</div>
+  <div class="label" style="top:250px; left:10px;" draggable="true">(b)</div>
+  <div class="label" style="top:290px; left:10px;" draggable="true">(c)</div>
+</div>
+
+<script>
+const labels = document.querySelectorAll('.label');
+const zones = document.querySelectorAll('.dropzone');
+
+// Reihenfolge der richtigen Lösungen
+const correct = ['1','2','3','4','5','a','b','c'];
+
+labels.forEach(label => {
+  label.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text', e.target.innerHTML);
+  });
+});
+
+zones.forEach((zone, i) => {
+  zone.addEventListener('dragover', e => e.preventDefault());
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    const dropped = e.dataTransfer.getData('text');
+    zone.innerHTML = dropped;
+
+    // Feedback
+    if(dropped === correct[i]){
+      zone.style.border = '2px solid green';
+    } else {
+      zone.style.border = '2px solid red';
+    }
+  });
+});
+</script>
+
+
+
+
+</body>
